@@ -57,8 +57,8 @@ This project is developed independently and is not officially affiliated with or
 
 ## 📜 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/Hemant2000-karens/Swayam-MOOC-Apple/blob/main/LICENSE) file for details.
 
 ## 📞 Contact
 
-For inquiries, suggestions, or potential collaboration discussions, please reach out to [hmt.kmr@icloud.com].
+For inquiries, suggestions, or potential collaboration discussions, please reach out to [hmt.kmr[at]icloud[dot]com].
