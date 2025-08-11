@@ -6,33 +6,66 @@
 //
 
 import SwiftUI
-import SwiftData
 
-struct ContentView: View {
-    
-    
+struct HomeCombinedView: View {
     var body: some View {
-        Image("contentView")
-            .resizable()
-        
-        VStack(alignment: .center){
-            
-            
-            GeometryReader{
-                geo in
-                Rectangle()
-                    .fill(Color.white)
-                    .frame(width: .infinity, height: (geo.size.height*0.25))
+        GeometryReader { geometry in
+            if isLandscape(for: geometry) || isMacOS {
+                HStack(spacing: 0) {
+                    homeHalf_1()
+                        .frame(width: geometry.size.width * ratio(for: geometry).0,
+                               height: geometry.size.height)
+                        .clipped()
+                    
+                    homeHalf_2()
+                        .frame(width: geometry.size.width * ratio(for: geometry).1,
+                               height: geometry.size.height)
+                }
+            } else {
+                VStack(spacing: 0) {
+                    homeHalf_1()
+                        .frame(width: geometry.size.width,
+                               height: geometry.size.height * 0.8)
+                        .clipped()
+                    
+                    homeHalf_2()
+                        .frame(width: geometry.size.width,
+                               height: geometry.size.height * 0.2)
+                }
             }
-            
-            
-            
-        }.ignoresSafeArea()
-       
+        }
+        .ignoresSafeArea()
+    }
+    
+    // Detect macOS
+    var isMacOS: Bool {
+#if os(macOS)
+        return true
+#else
+        return false
+#endif
+    }
+    
+    // Detect landscape using width/height
+    func isLandscape(for geometry: GeometryProxy) -> Bool {
+        geometry.size.width > geometry.size.height
+    }
+    
+    // Different ratios for devices
+    func ratio(for geometry: GeometryProxy) -> (CGFloat, CGFloat) {
+#if os(macOS)
+        return (0.4, 0.6)
+#else
+        // iPhone or iPad Landscape
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            return (0.5, 0.5) // iPhone Landscape
+        } else {
+            return (0.5, 0.5) // iPad Landscape (balanced)
+        }
+#endif
     }
 }
 
 #Preview {
-    ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+    HomeCombinedView()
 }

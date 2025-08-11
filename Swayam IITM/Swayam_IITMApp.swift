@@ -25,7 +25,7 @@ struct Swayam_IITMApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeCombinedView()
         }
         .modelContainer(sharedModelContainer)
     }
