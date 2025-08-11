@@ -63,7 +63,7 @@ struct homeHalf_1: View {
                             .font(.title2)
                         
                         Text("Swayam")
-                            .font(.system(size: 36, weight: .bold))
+                            .font(.custom("Impact", size: 40))
                             .foregroundColor(.blue)
                     }
                 }
