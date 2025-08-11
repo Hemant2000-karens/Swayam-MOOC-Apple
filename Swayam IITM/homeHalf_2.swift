@@ -36,8 +36,6 @@ struct homeHalf_2: View {
         .padding(.horizontal, 40)
         .padding(.vertical, 50)
         .background(
-//            Color(.systemBackground) // Adapts to light/dark mode
-//                .ignoresSafeArea()
         )
     }
 }
