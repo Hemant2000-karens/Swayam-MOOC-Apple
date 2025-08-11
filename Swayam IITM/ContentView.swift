@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeCombinedView: View {
     var body: some View {
         GeometryReader { geometry in
-            if isLandscape(for: geometry) || isMacOS {
+            if isLandscape(for: geometry) {
                 HStack(spacing: 0) {
                     homeHalf_1()
                         .frame(width: geometry.size.width * ratio(for: geometry).0,
@@ -37,33 +37,25 @@ struct HomeCombinedView: View {
         .ignoresSafeArea()
     }
     
-    // Detect macOS
-    var isMacOS: Bool {
-#if os(macOS)
-        return true
-#else
-        return false
-#endif
-    }
-    
     // Detect landscape using width/height
     func isLandscape(for geometry: GeometryProxy) -> Bool {
         geometry.size.width > geometry.size.height
     }
+
     
     // Different ratios for devices
     func ratio(for geometry: GeometryProxy) -> (CGFloat, CGFloat) {
-#if os(macOS)
-        return (0.4, 0.6)
-#else
-        // iPhone or iPad Landscape
+        #if os(iOS) || os(iPadOS)
         if UIDevice.current.userInterfaceIdiom == .phone {
             return (0.5, 0.5) // iPhone Landscape
         } else {
-            return (0.5, 0.5) // iPad Landscape (balanced)
+            return (0.4, 0.6) // iPad Landscape
         }
-#endif
+        #else
+        return (0.6, 0.4) // macOS ya tvOS default
+        #endif
     }
+    
 }
 
 #Preview {
